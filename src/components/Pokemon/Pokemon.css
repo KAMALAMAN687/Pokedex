@@ -1,0 +1,38 @@
+.Pokename{
+    letter-spacing: 2px;
+    font-size: 25px;
+    text-align: center;
+    text-transform: capitalize;
+    color: black;
+    font-weight: 700;
+    
+
+}
+.Pokeimage{
+    height:150px;
+    width:150px;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+}
+.Pokeimage:hover{
+    height:200px;
+    width:200px;
+
+
+}
+.onediv{
+    margin: 20px;
+    padding:40px;
+    border-radius: 20px;
+    max-height: 200px;
+    min-width: 200px;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.onediv:hover{
+    background:lightslategrey;
+    
+}
+.Pokimage{
+    overflow: hidden;
+}
