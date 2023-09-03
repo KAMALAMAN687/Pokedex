@@ -7,7 +7,7 @@ import Loader from "../Loader/Loader.jsx";
 import usePokemonList from "../../hooks/usePokemonList.js";
 
 function PokemonList() {
-  const [pokemonListState, setPokemonListState] = usePokemonList(false);
+  const [pokemonListState, setPokemonListState] = usePokemonList();
   return (
     <div className="pokemon-list-wrapper">
       <div className="Pokeheading">Pokemon List</div>

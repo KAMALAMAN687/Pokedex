@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import "./PokemonDetails.css";
 import Loader from "../Loader/Loader";
 import usePokemonDetails from "../../hooks/usePokemonDetails";
-function PokemonDetails() {
+function PokemonDetails({ pokemonName }) {
   const { id } = useParams();
-  const [pokemon, loading] = usePokemonDetails(id);
+  const [pokemon, loading] = usePokemonDetails(id, pokemonName);
   return (
     <div className="full">
       <Link to="/">
@@ -34,13 +34,12 @@ function PokemonDetails() {
           </div>
         </div>
       )}
-
       {pokemon.types && pokemon.similarPokemons && (
         <div className="more-types">
           <h1 className="heading">More {pokemon.types[0]} type pokemons</h1>
           <ul className="ullist-div">
             {pokemon.similarPokemons.map((e) => (
-              <li className="li-div" key={e.pokemon.id}>
+              <li className="li-div" key={e.pokemon.name}>
                 {e.pokemon.name}
               </li>
             ))}

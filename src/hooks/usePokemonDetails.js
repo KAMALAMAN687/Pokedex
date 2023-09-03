@@ -2,12 +2,20 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import usePokemonList from "./usePokemonList";
 
-function usePokemonDetails(id) {
+function usePokemonDetails(id, pokemonName) {
   const [pokemon, setPokemon] = useState({});
   const [loading, setLoading] = useState(true);
   async function downloadPokemon() {
     setLoading(true);
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    let response;
+    if (pokemonName) {
+      response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+      );
+    } else {
+      response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    }
+
     const pokemonOfSameTypes = await axios.get(
       `https://pokeapi.co/api/v2/type/${
         response.data.types ? response.data.types[0].type.name : " "
