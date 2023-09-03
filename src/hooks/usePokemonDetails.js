@@ -40,7 +40,7 @@ function usePokemonDetails(id, pokemonName) {
     console.log(pokemon);
   }
 
-  const [pokemonListState, setPokemonListState] = usePokemonList();
+  const [pokemonListState, setPokemonListState] = useState({});
 
   useEffect(() => {
     downloadPokemon();
