@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function usePokemonList() {
+  const DEFAULT_URL = "https://pokeapi.co/api/v2/pokemon";
   const [pokemonListState, setPokemonListState] = useState({
     POKEDEX_URL: "https://pokeapi.co/api/v2/pokemon",
     pokemonList: [],
@@ -12,8 +13,6 @@ function usePokemonList() {
   });
 
   async function downloadPokemons() {
-    //setIsLoading(true);
-    //setShowBtn(false);
     setPokemonListState((state) => ({
       ...state,
       isLoading: true,
@@ -26,8 +25,7 @@ function usePokemonList() {
       nexturl: response.data.next,
       prevurl: response.data.previous,
     }));
-    //setNextUrl(response.data.next);
-    //setPrevUrl(response.data.previous);
+
     const pokemonResultPromise = pokemonResults.map((pokemon) =>
       axios.get(pokemon.url)
     );
@@ -42,23 +40,19 @@ function usePokemonList() {
         types: pokemon.types,
       };
     });
-    //console.log(res);
     setPokemonListState((state) => ({
       ...state,
       pokemonList: res,
       isLoading: false,
       showBtn: true,
     }));
-    //setPokemonList(res);
-    //console.log(pokemonList);
-    //setIsLoading(false);
-    //setShowBtn(true);
   }
+
   useEffect(() => {
     downloadPokemons();
   }, [pokemonListState.POKEDEX_URL]);
 
-  return { pokemonListState, setPokemonListState };
+  return [pokemonListState, setPokemonListState];
 }
 
 export default usePokemonList;

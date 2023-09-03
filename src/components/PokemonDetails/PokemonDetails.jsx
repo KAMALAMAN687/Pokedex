@@ -1,30 +1,12 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./PokemonDetails.css";
 import Loader from "../Loader/Loader";
+import usePokemonDetails from "../../hooks/usePokemonDetails";
 function PokemonDetails() {
   const { id } = useParams();
-  const [pokemon, setPokemon] = useState({});
-  const [loading, setLoading] = useState(true);
-  async function downloadPokemon() {
-    setLoading(true);
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    setPokemon({
-      name: response.data.name,
-      image: response.data.sprites.other.dream_world.front_default,
-      weight: response.data.weight,
-      height: response.data.height,
-      types: response.data.types.map((t) => t.type.name),
-    });
-    setLoading(false);
-    console.log(pokemon);
-  }
-  useEffect(() => {
-    downloadPokemon();
-  }, []);
-
+  const [pokemon, loading] = usePokemonDetails(id);
   return (
     <div className="full">
       <Link to="/">
@@ -50,6 +32,19 @@ function PokemonDetails() {
                 ))}
             </div>
           </div>
+        </div>
+      )}
+
+      {pokemon.types && pokemon.similarPokemons && (
+        <div className="more-types">
+          <h1 className="heading">More {pokemon.types[0]} type pokemons</h1>
+          <ul className="ullist-div">
+            {pokemon.similarPokemons.map((e) => (
+              <li className="li-div" key={e.pokemon.id}>
+                {e.pokemon.name}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
