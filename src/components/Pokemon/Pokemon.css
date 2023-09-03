@@ -6,7 +6,11 @@
     color: black;
     font-weight: 700;
     
+    
 
+}
+.link{
+    text-decoration: none;
 }
 .Pokeimage{
     height:150px;
@@ -25,7 +29,8 @@
     padding:40px;
     border-radius: 20px;
     max-height: 200px;
-    min-width: 200px;
+    min-width: 250px;
+    /*width: 100vw;*/
     transition: all .3s ease;
     cursor: pointer;
 }
@@ -35,4 +40,7 @@
 }
 .Pokimage{
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
